@@ -16,7 +16,6 @@ public class TableEntity extends AbstractEntity {
     public TableEntity(Integer tableNumber, Integer availableSeats) {
         this.tableNumber = tableNumber;
         this.availableSeats = availableSeats;
-        this.isReserved = false;
     }
 
     @Column(name = "table_number", nullable = false)
@@ -24,8 +23,5 @@ public class TableEntity extends AbstractEntity {
 
     @Column(name = "available_seats", nullable = false)
     private Integer availableSeats;
-
-    @Column(name = "isReserved", nullable = false)
-    private Boolean isReserved;
 
 }
