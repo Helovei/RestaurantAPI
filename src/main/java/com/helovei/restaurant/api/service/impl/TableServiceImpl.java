@@ -17,4 +17,5 @@ public class TableServiceImpl extends AbstractService<TableEntity, TablesReposit
     public boolean isExists(TableEntity tableEntity) {
         return repository.existsByTableNumber(tableEntity.getTableNumber());
     }
+
 }

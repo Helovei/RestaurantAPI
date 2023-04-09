@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface TablesRepository extends JpaRepository<TableEntity, Long> {
 
     boolean existsByTableNumber(Integer tableNumber);
+    TableEntity getTableEntitiesByTableNumber(Integer tableNumber);
 
 }

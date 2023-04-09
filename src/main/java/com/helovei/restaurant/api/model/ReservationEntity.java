@@ -22,11 +22,11 @@ public class ReservationEntity extends AbstractEntity {
         this.endReservation = endReservation;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "guest_id", nullable = false)
     private GuestEntity guest;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "table_id", nullable = false)
     private TableEntity table;
     @Column(name = "start_reservation", nullable = false)
@@ -36,9 +36,5 @@ public class ReservationEntity extends AbstractEntity {
     @Column(name = "end_reservation", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date endReservation;
-
-    @Column(name = "date_reservation", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dateReservation;
 
 }

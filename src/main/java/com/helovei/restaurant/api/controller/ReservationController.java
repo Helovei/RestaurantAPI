@@ -7,11 +7,9 @@ import com.helovei.restaurant.api.exception.TableIsReservedException;
 import com.helovei.restaurant.api.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -25,7 +23,7 @@ public class ReservationController {
     }
 
     @PostMapping("/addReservation")
-    public ResponseEntity<?> addReservation(@ModelAttribute ReservationDto reservationDTO) throws TableIsReservedException, ObjectExistsInBaseException {
+    public ResponseEntity<?> addReservation(@RequestBody ReservationDto reservationDTO) throws TableIsReservedException, ObjectExistsInBaseException, ParseException {
         reservationService.add(reservationDTO.getEntity());
         return ResponseEntity.ok().build();
     }
@@ -33,11 +31,11 @@ public class ReservationController {
 //    true - совпадений не найдено
 //    false - пересечение
     @PostMapping("/check")
-    public ResponseEntity<?> check(@ModelAttribute ReservationDto reservationDTO){
+    public ResponseEntity<?> check(@ModelAttribute ReservationDto reservationDTO) throws ParseException {
         return ResponseEntity.ok(reservationService.check(reservationDTO.getEntity()));
     }
 
-    @GetMapping("/getReservation")
+    @GetMapping("/getReservations")
     public ResponseEntity<?> getAll(){
         List<OutReservationsDto> dtoList = new java.util.ArrayList<>();
         reservationService.getAll().forEach(item -> dtoList.add(new OutReservationsDto(item)));

@@ -2,6 +2,7 @@ package com.helovei.restaurant.api.service.impl;
 
 import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
 import com.helovei.restaurant.api.exception.ObjectNotExistsInBaseException;
+import com.helovei.restaurant.api.exception.ReservationTimeIsInvalidException;
 import com.helovei.restaurant.api.exception.TableIsReservedException;
 import com.helovei.restaurant.api.model.AbstractEntity;
 import com.helovei.restaurant.api.service.Service;
@@ -23,10 +24,10 @@ public abstract class AbstractService<T extends AbstractEntity, R extends JpaRep
     }
 
     @Override
-    public void add(T t) throws ObjectExistsInBaseException, TableIsReservedException {
-        if (t.getId() == null && !isExists(t)){
-            repository.save(t);
-        } else throw new ObjectExistsInBaseException();
+    public void add(T t) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
+        if (t.getId() != null && !isExists(t)){
+                repository.save(t);
+            } else throw new ObjectExistsInBaseException();
     }
 
     @Override

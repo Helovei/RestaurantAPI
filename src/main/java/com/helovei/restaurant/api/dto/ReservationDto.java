@@ -18,26 +18,31 @@ public class ReservationDto implements Dto<ReservationEntity>{
     private TableEntity table;
     private String startReservation;
     private String endReservation;
-    private final ReservationEntity entity;
 
     public ReservationDto(GuestEntity guest, TableEntity table, String startReservation, String endReservation) throws ParseException {
-        DateFormatter dateFormatter = new DateFormatter("dd-MM-yyyy HH:mm");
         this.guest = guest;
         this.table = table;
         this.startReservation = startReservation;
         this.endReservation = endReservation;
-        this.entity = new ReservationEntity(
+    }
+
+    public ReservationEntity getEntity() throws ParseException {
+        DateFormatter dateFormatter = new DateFormatter("dd-MM-yyyy HH:mm");
+        return new ReservationEntity(
                 this.guest,
                 this.table,
-                dateFormatter.parse(startReservation, Locale.ENGLISH),
-                dateFormatter.parse(endReservation, Locale.ENGLISH)
+                dateFormatter.parse(startReservation, Locale.GERMAN),
+                dateFormatter.parse(endReservation, Locale.GERMAN)
         );
     }
 
-    public ReservationEntity getEntity() {
-        return entity;
+    @Override
+    public String toString() {
+        return "ReservationDto{" +
+                "guest=" + guest +
+                ", table=" + table +
+                ", startReservation='" + startReservation + '\'' +
+                ", endReservation='" + endReservation + '\'' +
+                '}';
     }
-
-
-
 }
