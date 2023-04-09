@@ -25,6 +25,9 @@ Add Guest
 firstName : String;  
 lastName : String;  
 patronymic : String;  
-phoneNumber : String;  
+phoneNumber : String; 
+
+
+
 
 

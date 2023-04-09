@@ -7,9 +7,13 @@ import com.helovei.restaurant.api.model.ReservationEntity;
 import com.helovei.restaurant.api.repository.ReservationRepository;
 import com.helovei.restaurant.api.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ReservationServiceImpl extends AbstractService<ReservationEntity, ReservationRepository> implements ReservationService {
@@ -38,8 +42,7 @@ public class ReservationServiceImpl extends AbstractService<ReservationEntity, R
     }
 
     private boolean checkTime(ReservationEntity entity) {
-        Date currentDate = new Date();
-        return entity.getStartReservation().after(currentDate) && entity.getEndReservation().after(currentDate);
+        return entity.getStartReservation().before(entity.getEndReservation());
     }
 
     private boolean checkIntersection(ReservationEntity oldReserved, ReservationEntity newReserved) {
@@ -48,5 +51,11 @@ public class ReservationServiceImpl extends AbstractService<ReservationEntity, R
         long startNewReserved = newReserved.getStartReservation().getTime();
         long endNewReserved = newReserved.getEndReservation().getTime();
         return (startOldReserved - endNewReserved) * (startNewReserved - endOldReserved) > 0;
+    }
+
+    @Override
+    public List<ReservationEntity> getReservationsByDate(String date) throws ParseException {
+        DateFormatter dateFormatter = new DateFormatter("dd.MM.yyyy");
+        return super.repository.getReservationEntitiesByDateReservation(dateFormatter.parse(date, Locale.GERMAN));
     }
 }

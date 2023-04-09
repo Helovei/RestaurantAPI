@@ -15,11 +15,12 @@ public class ReservationEntity extends AbstractEntity {
     public ReservationEntity() {
     }
 
-    public ReservationEntity(GuestEntity guest, TableEntity table, Date startReservation, Date endReservation) {
+    public ReservationEntity(GuestEntity guest, TableEntity table,Date dateReservation, Date startReservation, Date endReservation) {
         this.guest = guest;
         this.table = table;
         this.startReservation = startReservation;
         this.endReservation = endReservation;
+        this.dateReservation = dateReservation;
     }
 
     @ManyToOne
@@ -29,12 +30,17 @@ public class ReservationEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "table_id", nullable = false)
     private TableEntity table;
+
+    @Column(name = "date_reservation")
+    @Temporal(TemporalType.DATE)
+    private Date dateReservation;
+
     @Column(name = "start_reservation", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     private Date startReservation;
 
     @Column(name = "end_reservation", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     private Date endReservation;
 
 }

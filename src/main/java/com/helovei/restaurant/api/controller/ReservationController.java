@@ -43,7 +43,9 @@ public class ReservationController {
         return ResponseEntity.ok(dtoList);
     }
 
-
-
+    @GetMapping("/getReservationsByDate")
+    public ResponseEntity<?> getReservationsByDate(@ModelAttribute String date) throws ParseException {
+        return ResponseEntity.ok(reservationService.getReservationsByDate(date));
+    }
 
 }

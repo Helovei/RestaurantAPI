@@ -2,6 +2,7 @@ package com.helovei.restaurant.api.controller;
 
 import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
 import com.helovei.restaurant.api.exception.ObjectNotExistsInBaseException;
+import com.helovei.restaurant.api.exception.ReservationTimeIsInvalidException;
 import com.helovei.restaurant.api.exception.TableIsReservedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ class GlobalControllerExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(TableIsReservedException.class)
+    @ExceptionHandler(ReservationTimeIsInvalidException.class)
     public ResponseEntity<?> handleReservationTimeIsInvalidException() {
         return ResponseEntity.badRequest().body("Reservation time is invalid");
     }
