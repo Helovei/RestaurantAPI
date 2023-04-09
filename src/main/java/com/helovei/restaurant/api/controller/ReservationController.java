@@ -3,6 +3,7 @@ package com.helovei.restaurant.api.controller;
 import com.helovei.restaurant.api.dto.OutReservationsDto;
 import com.helovei.restaurant.api.dto.ReservationDto;
 import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
+import com.helovei.restaurant.api.exception.ReservationTimeIsInvalidException;
 import com.helovei.restaurant.api.exception.TableIsReservedException;
 import com.helovei.restaurant.api.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ReservationController {
     }
 
     @PostMapping("/addReservation")
-    public ResponseEntity<?> addReservation(@RequestBody ReservationDto reservationDTO) throws TableIsReservedException, ObjectExistsInBaseException, ParseException {
+    public ResponseEntity<?> addReservation(@RequestBody ReservationDto reservationDTO) throws TableIsReservedException, ObjectExistsInBaseException, ParseException, ReservationTimeIsInvalidException {
         reservationService.add(reservationDTO.getEntity());
         return ResponseEntity.ok().build();
     }

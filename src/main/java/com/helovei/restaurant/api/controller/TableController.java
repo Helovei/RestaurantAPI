@@ -2,6 +2,7 @@ package com.helovei.restaurant.api.controller;
 
 import com.helovei.restaurant.api.dto.NewTableDto;
 import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
+import com.helovei.restaurant.api.exception.ReservationTimeIsInvalidException;
 import com.helovei.restaurant.api.exception.TableIsReservedException;
 import com.helovei.restaurant.api.model.TableEntity;
 import com.helovei.restaurant.api.service.TableService;
@@ -25,7 +26,7 @@ public class TableController {
     }
 
     @PostMapping("/addTable")
-    public ResponseEntity<?> addTable(@ModelAttribute NewTableDto newTableDto) throws ObjectExistsInBaseException, TableIsReservedException {
+    public ResponseEntity<?> addTable(@ModelAttribute NewTableDto newTableDto) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
         tableService.add(newTableDto.getEntity());
         return ResponseEntity.ok("adding table is success");
     }
