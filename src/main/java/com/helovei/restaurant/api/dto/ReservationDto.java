@@ -30,6 +30,7 @@ public class ReservationDto implements Dto<ReservationEntity> {
     public ReservationEntity getEntity() throws ParseException {
         DateFormatter dateFormatter = new DateFormatter("dd.MM.yyyy");
         DateFormatter timeFormatter = new DateFormatter("HH:mm");
+        
         return new ReservationEntity(
                 this.guest,
                 this.table,

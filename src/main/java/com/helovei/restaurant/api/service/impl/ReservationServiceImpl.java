@@ -33,11 +33,10 @@ public class ReservationServiceImpl extends AbstractService<ReservationEntity, R
 
     }
 
+//    to do
     @Override
     public boolean check(ReservationEntity reservationEntity) {
-        return super.getAll().stream()
-                .filter(existReservation -> checkIntersection(existReservation, reservationEntity))
-                .findFirst().isEmpty();
+        return true;
 
     }
 
@@ -57,5 +56,16 @@ public class ReservationServiceImpl extends AbstractService<ReservationEntity, R
     public List<ReservationEntity> getReservationsByDate(String date) throws ParseException {
         DateFormatter dateFormatter = new DateFormatter("dd.MM.yyyy");
         return super.repository.getReservationEntitiesByDateReservation(dateFormatter.parse(date, Locale.GERMAN));
+    }
+
+    @Override
+    public boolean isExists(ReservationEntity entity) {
+        return super.repository.existsByDateReservationAndStartReservationAndEndReservationAndGuestAndTable(
+                entity.getDateReservation(),
+                entity.getStartReservation(),
+                entity.getEndReservation(),
+                entity.getGuest(),
+                entity.getTable()
+        );
     }
 }
