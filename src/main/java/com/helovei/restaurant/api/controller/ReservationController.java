@@ -32,7 +32,7 @@ public class ReservationController {
 //    true - совпадений не найдено
 //    false - пересечение
     @PostMapping("/check")
-    public ResponseEntity<?> check(@ModelAttribute ReservationDto reservationDTO) throws ParseException {
+    public ResponseEntity<?> check(@RequestBody ReservationDto reservationDTO) throws ParseException {
         return ResponseEntity.ok(reservationService.check(reservationDTO.getEntity()));
     }
 
@@ -42,7 +42,7 @@ public class ReservationController {
     }
 
     @GetMapping("/getReservationsByDate")
-    public ResponseEntity<?> getReservationsByDate(@ModelAttribute String date) throws ParseException {
+    public ResponseEntity<?> getReservationsByDate(@RequestBody String date) throws ParseException {
         List<OutReservationsDto> dtoList = new java.util.ArrayList<>();
         reservationService.getReservationsByDate(date).forEach(item -> dtoList.add(new OutReservationsDto(item)));
         return ResponseEntity.ok(reservationService.getReservationsByDate(date));

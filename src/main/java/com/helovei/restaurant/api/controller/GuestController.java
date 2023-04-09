@@ -20,7 +20,7 @@ public class GuestController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<?> registration(@ModelAttribute RegistrationDto registrationDto) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
+    public ResponseEntity<?> registration(@RequestBody RegistrationDto registrationDto) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
         guestService.add(registrationDto.getEntity());
         return ResponseEntity.ok(guestService.getGuestEntityByFirstNameAndPatronymicAndLastName(
                 registrationDto.getFirstName(),
