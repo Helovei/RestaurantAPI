@@ -38,13 +38,13 @@ public class ReservationController {
 
     @GetMapping("/getReservations")
     public ResponseEntity<?> getAll(){
-        List<OutReservationsDto> dtoList = new java.util.ArrayList<>();
-        reservationService.getAll().forEach(item -> dtoList.add(new OutReservationsDto(item)));
-        return ResponseEntity.ok(dtoList);
+        return ResponseEntity.ok(reservationService.getAll());
     }
 
     @GetMapping("/getReservationsByDate")
     public ResponseEntity<?> getReservationsByDate(@ModelAttribute String date) throws ParseException {
+        List<OutReservationsDto> dtoList = new java.util.ArrayList<>();
+        reservationService.getReservationsByDate(date).forEach(item -> dtoList.add(new OutReservationsDto(item)));
         return ResponseEntity.ok(reservationService.getReservationsByDate(date));
     }
 
