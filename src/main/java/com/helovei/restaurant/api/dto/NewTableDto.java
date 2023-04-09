@@ -4,13 +4,11 @@ import com.helovei.restaurant.api.model.TableEntity;
 import lombok.Data;
 
 @Data
-public class NewTableDto implements Dto<TableEntity> {
+public class NewTableDto{
 
     private Integer tableNumber;
 
     private Integer availableSeats;
-
-    @Override
     public TableEntity getEntity() {
         return new TableEntity(
                 tableNumber,

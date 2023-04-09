@@ -11,6 +11,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -54,8 +55,8 @@ public class ReservationServiceImpl extends AbstractService<ReservationEntity, R
 
     @Override
     public List<ReservationEntity> getReservationsByDate(String date) throws ParseException {
-        DateFormatter dateFormatter = new DateFormatter("dd.MM.yyyy");
-        return super.repository.getReservationEntitiesByDateReservation(dateFormatter.parse(date, Locale.GERMAN));
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        return super.repository.getReservationEntitiesByDateReservation(dateFormatter.parse(date));
     }
 
     @Override

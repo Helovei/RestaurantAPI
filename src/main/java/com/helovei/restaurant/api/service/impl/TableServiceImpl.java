@@ -18,4 +18,8 @@ public class TableServiceImpl extends AbstractService<TableEntity, TablesReposit
         return repository.existsByTableNumber(tableEntity.getTableNumber());
     }
 
+    @Override
+    public TableEntity getTableEntityByTableNumber(Integer tableNumber) {
+        return super.repository.getTableEntitiesByTableNumber(tableNumber);
+    }
 }

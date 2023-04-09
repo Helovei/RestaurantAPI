@@ -4,14 +4,14 @@ import com.helovei.restaurant.api.model.GuestEntity;
 import lombok.Data;
 
 @Data
-public class RegistrationDto implements Dto<GuestEntity> {
+public class RegistrationDto {
 
     private String firstName;
     private String lastName;
     private String patronymic;
     private String phoneNumber;
 
-    @Override
+
     public GuestEntity getEntity() {
         return new GuestEntity(
                 firstName,

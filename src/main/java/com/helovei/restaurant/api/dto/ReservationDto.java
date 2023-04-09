@@ -12,31 +12,27 @@ import java.util.Locale;
 
 @Getter
 @Setter
-public class ReservationDto implements Dto<ReservationEntity> {
+public class ReservationDto {
 
     private GuestEntity guest;
-    private TableEntity table;
+    private Integer tableNumber;
     private String dateReservation;
     private String startReservation;
     private String endReservation;
+    private String firstName;
+    private String lastName;
+    private String patronymic;
+    private String phoneNumber;
 
-    public ReservationDto(GuestEntity guest, TableEntity table, String startReservation, String endReservation) throws ParseException {
+    public ReservationDto(GuestEntity guest, Integer tableNumber, String dateReservation, String startReservation, String endReservation, String firstName, String lastName, String patronymic, String phoneNumber) {
         this.guest = guest;
-        this.table = table;
+        this.tableNumber = tableNumber;
+        this.dateReservation = dateReservation;
         this.startReservation = startReservation;
         this.endReservation = endReservation;
-    }
-
-    public ReservationEntity getEntity() throws ParseException {
-        DateFormatter dateFormatter = new DateFormatter("dd.MM.yyyy");
-        DateFormatter timeFormatter = new DateFormatter("HH:mm");
-        
-        return new ReservationEntity(
-                this.guest,
-                this.table,
-                dateFormatter.parse(this.dateReservation, Locale.GERMAN),
-                timeFormatter.parse(this.startReservation, Locale.GERMAN),
-                timeFormatter.parse(this.endReservation, Locale.GERMAN)
-        );
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.phoneNumber = phoneNumber;
     }
 }

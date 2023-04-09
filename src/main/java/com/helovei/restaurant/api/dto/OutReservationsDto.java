@@ -12,11 +12,13 @@ public class OutReservationsDto {
     private TableEntity table;
     private Date startReservation;
     private Date endReservation;
+    private Date dateReservation;
 
     public OutReservationsDto(ReservationEntity entity) {
         this.table = entity.getTable();
         this.startReservation = entity.getStartReservation();
         this.endReservation = entity.getEndReservation();
+        this.dateReservation = entity.getDateReservation();
     }
 
 }
