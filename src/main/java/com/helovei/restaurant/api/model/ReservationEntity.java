@@ -31,7 +31,7 @@ public class ReservationEntity extends AbstractEntity {
     @JoinColumn(name = "table_id", nullable = false)
     private TableEntity table;
 
-    @Column(name = "date_reservation")
+    @Column(name = "date_reservation", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dateReservation;
 
