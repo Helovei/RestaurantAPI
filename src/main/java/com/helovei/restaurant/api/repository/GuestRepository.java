@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface GuestRepository extends JpaRepository<GuestEntity, Long> {
 
     boolean existsByFirstNameAndPatronymicAndAndLastName(String firstName, String patronymic, String lastName);
+    GuestEntity getGuestEntityByFirstNameAndPatronymicAndLastName(String firstName, String patronymic, String lastName);
 
 }

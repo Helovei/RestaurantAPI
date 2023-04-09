@@ -25,7 +25,7 @@ public abstract class AbstractService<T extends AbstractEntity, R extends JpaRep
 
     @Override
     public void add(T t) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
-        if (t.getId() != null && !isExists(t)){
+        if (t.getId() == null && !isExists(t)){
                 repository.save(t);
             } else throw new ObjectExistsInBaseException();
     }

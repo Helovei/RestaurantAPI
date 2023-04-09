@@ -22,4 +22,9 @@ public class GuestServiceImpl extends AbstractService<GuestEntity, GuestReposito
                 guestEntity.getLastName()
         );
     }
+
+    @Override
+    public GuestEntity getGuestEntityByFirstNameAndPatronymicAndLastName(String firstName, String patronymic, String lastName) {
+        return super.repository.getGuestEntityByFirstNameAndPatronymicAndLastName(firstName, patronymic, lastName);
+    }
 }

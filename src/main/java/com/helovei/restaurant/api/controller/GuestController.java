@@ -22,7 +22,11 @@ public class GuestController {
     @PostMapping("/registration")
     public ResponseEntity<?> registration(@ModelAttribute RegistrationDto registrationDto) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
         guestService.add(registrationDto.getEntity());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(guestService.getGuestEntityByFirstNameAndPatronymicAndLastName(
+                registrationDto.getFirstName(),
+                registrationDto.getPatronymic(),
+                registrationDto.getLastName()
+        ));
     }
 
     @GetMapping("/getGuests")
