@@ -54,9 +54,9 @@ public class ReservationController {
     }
 
     @GetMapping("/getReservationsByDate")
-    public ResponseEntity<?> getReservationsByDate(@RequestBody DateDto date) throws ParseException {
+    public ResponseEntity<?> getReservationsByDate(@RequestParam String date) throws ParseException {
         List<OutReservationsDto> dtoList = new java.util.ArrayList<>();
-        reservationService.getReservationsByDate(date.getDate()).forEach(item -> dtoList.add(new OutReservationsDto(item)));
+        reservationService.getReservationsByDate(date).forEach(item -> dtoList.add(new OutReservationsDto(item)));
         return ResponseEntity.ok(dtoList);
     }
 
