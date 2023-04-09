@@ -26,7 +26,7 @@ public class TableController {
     }
 
     @PostMapping("/addTable")
-    public ResponseEntity<?> addTable(@ModelAttribute NewTableDto newTableDto) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
+    public ResponseEntity<?> addTable(@RequestBody NewTableDto newTableDto) throws ObjectExistsInBaseException, TableIsReservedException, ReservationTimeIsInvalidException {
         tableService.add(newTableDto.getEntity());
         return ResponseEntity.ok("adding table is success");
     }
