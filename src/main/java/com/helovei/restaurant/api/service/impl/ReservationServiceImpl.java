@@ -55,7 +55,7 @@ public class ReservationServiceImpl extends AbstractService<ReservationEntity, R
 
     @Override
     public List<ReservationEntity> getReservationsByDate(String date) throws ParseException {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         return super.repository.getReservationEntitiesByDateReservation(dateFormatter.parse(date));
     }
 
