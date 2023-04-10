@@ -1,7 +1,5 @@
 package com.helovei.restaurant.api.controller;
 
-import com.helovei.restaurant.api.dto.DateDto;
-import com.helovei.restaurant.api.dto.GuestDto;
 import com.helovei.restaurant.api.dto.OutReservationsDto;
 import com.helovei.restaurant.api.dto.ReservationDto;
 import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
@@ -12,14 +10,12 @@ import com.helovei.restaurant.api.service.GuestService;
 import com.helovei.restaurant.api.service.ReservationService;
 import com.helovei.restaurant.api.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 public class ReservationController {
@@ -61,7 +57,7 @@ public class ReservationController {
     }
 
     private ReservationEntity getEntity(ReservationDto reservationDto) throws ParseException {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
         return new ReservationEntity(
                 guestService.getGuestEntityByFirstNameAndPatronymicAndLastName(
