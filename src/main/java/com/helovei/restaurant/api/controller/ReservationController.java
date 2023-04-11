@@ -5,6 +5,7 @@ import com.helovei.restaurant.api.dto.ReservationDto;
 import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
 import com.helovei.restaurant.api.exception.ReservationTimeIsInvalidException;
 import com.helovei.restaurant.api.exception.TableIsReservedException;
+import com.helovei.restaurant.api.model.GuestEntity;
 import com.helovei.restaurant.api.model.ReservationEntity;
 import com.helovei.restaurant.api.service.GuestService;
 import com.helovei.restaurant.api.service.ReservationService;
@@ -41,7 +42,7 @@ public class ReservationController {
     //    true - совпадений не найдено
 //    false - пересечение
     @PostMapping("/check")
-    public ResponseEntity<?> check(@RequestBody ReservationDto reservationDTO) throws ParseException {
+    public ResponseEntity<?> check(@RequestBody ReservationDto reservationDTO) throws ParseException, TableIsReservedException, ReservationTimeIsInvalidException, ObjectExistsInBaseException {
         return ResponseEntity.ok(reservationService.check(getEntity(reservationDTO)));
     }
 
@@ -57,9 +58,15 @@ public class ReservationController {
         return ResponseEntity.ok(dtoList);
     }
 
-    private ReservationEntity getEntity(ReservationDto reservationDto) throws ParseException {
+    private ReservationEntity getEntity(ReservationDto reservationDto) throws ParseException, TableIsReservedException, ReservationTimeIsInvalidException, ObjectExistsInBaseException {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+        guestService.add(new GuestEntity(
+                reservationDto.getFirstName(),
+                reservationDto.getLastName(),
+                reservationDto.getPatronymic(),
+                reservationDto.getPhoneNumber()
+        ));
         return new ReservationEntity(
                 guestService.getGuestEntityByFirstNameAndPatronymicAndLastName(
                         reservationDto.getFirstName(),

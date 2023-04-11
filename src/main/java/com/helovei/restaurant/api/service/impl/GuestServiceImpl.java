@@ -1,5 +1,8 @@
 package com.helovei.restaurant.api.service.impl;
 
+import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
+import com.helovei.restaurant.api.exception.ReservationTimeIsInvalidException;
+import com.helovei.restaurant.api.exception.TableIsReservedException;
 import com.helovei.restaurant.api.model.GuestEntity;
 import com.helovei.restaurant.api.repository.GuestRepository;
 import com.helovei.restaurant.api.service.GuestService;
@@ -12,6 +15,13 @@ public class GuestServiceImpl extends AbstractService<GuestEntity, GuestReposito
     @Autowired
     public GuestServiceImpl(GuestRepository repository) {
         super(repository);
+    }
+
+    @Override
+    public void add(GuestEntity guest) {
+        if (guest.getId() == null && !isExists(guest)){
+            repository.save(guest);
+        }
     }
 
     @Override
