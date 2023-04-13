@@ -1,5 +1,6 @@
 package com.helovei.restaurant.api.service.impl;
 
+import com.helovei.restaurant.api.exception.ObjectNotExistsInBaseException;
 import com.helovei.restaurant.api.model.TableEntity;
 import com.helovei.restaurant.api.repository.TablesRepository;
 import com.helovei.restaurant.api.service.TableService;
@@ -19,7 +20,11 @@ public class TableServiceImpl extends AbstractService<TableEntity, TablesReposit
     }
 
     @Override
-    public TableEntity getTableEntityByTableNumber(Integer tableNumber) {
-        return super.repository.getTableEntitiesByTableNumber(tableNumber);
+    public TableEntity getTableEntityByTableNumber(Integer tableNumber) throws ObjectNotExistsInBaseException {
+        TableEntity getTable = super.repository.getTableEntitiesByTableNumber(tableNumber);
+        if (getTable != null) {
+            return getTable;
+        } else throw new ObjectNotExistsInBaseException();
+
     }
 }

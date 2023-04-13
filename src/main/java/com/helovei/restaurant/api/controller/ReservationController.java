@@ -3,6 +3,7 @@ package com.helovei.restaurant.api.controller;
 import com.helovei.restaurant.api.dto.OutReservationsDto;
 import com.helovei.restaurant.api.dto.ReservationDto;
 import com.helovei.restaurant.api.exception.ObjectExistsInBaseException;
+import com.helovei.restaurant.api.exception.ObjectNotExistsInBaseException;
 import com.helovei.restaurant.api.exception.ReservationTimeIsInvalidException;
 import com.helovei.restaurant.api.exception.TableIsReservedException;
 import com.helovei.restaurant.api.model.GuestEntity;
@@ -34,7 +35,7 @@ public class ReservationController {
     }
 
     @PostMapping("/addReservation")
-    public ResponseEntity<?> addReservation(@RequestBody ReservationDto reservationDTO) throws TableIsReservedException, ObjectExistsInBaseException, ParseException, ReservationTimeIsInvalidException {
+    public ResponseEntity<?> addReservation(@RequestBody ReservationDto reservationDTO) throws TableIsReservedException, ObjectExistsInBaseException, ParseException, ReservationTimeIsInvalidException, ObjectNotExistsInBaseException {
         reservationService.add(getEntity(reservationDTO));
         return ResponseEntity.ok().build();
     }
@@ -42,7 +43,7 @@ public class ReservationController {
     //    true - совпадений не найдено
 //    false - пересечение
     @PostMapping("/check")
-    public ResponseEntity<?> check(@RequestBody ReservationDto reservationDTO) throws ParseException, TableIsReservedException, ReservationTimeIsInvalidException, ObjectExistsInBaseException {
+    public ResponseEntity<?> check(@RequestBody ReservationDto reservationDTO) throws ParseException, TableIsReservedException, ReservationTimeIsInvalidException, ObjectExistsInBaseException, ObjectNotExistsInBaseException {
         return ResponseEntity.ok(reservationService.check(getEntity(reservationDTO)));
     }
 
@@ -58,7 +59,7 @@ public class ReservationController {
         return ResponseEntity.ok(dtoList);
     }
 
-    private ReservationEntity getEntity(ReservationDto reservationDto) throws ParseException, TableIsReservedException, ReservationTimeIsInvalidException, ObjectExistsInBaseException {
+    private ReservationEntity getEntity(ReservationDto reservationDto) throws ParseException, TableIsReservedException, ReservationTimeIsInvalidException, ObjectExistsInBaseException, ObjectNotExistsInBaseException {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
         guestService.add(new GuestEntity(
